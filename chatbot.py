@@ -2,9 +2,10 @@ import re
 import pickle
 import string
 import random
+
+#Generate next word given a seed word
 def findNext (curr, pairdict, worddict):
     if curr in worddict:
-        print curr + "\n"
         wBest = curr
         pBest = 0
         candidates = []
@@ -19,19 +20,22 @@ def findNext (curr, pairdict, worddict):
     else:
         print "not found"
 
-
+#load data -- you might need to generate this first with parser.py
 pairfile= "pairs.pkl"
 wordfile = "words.pkl"
+linefile = "lines.pkl"
 wfile = open(wordfile, 'rb')
 pfile = open(pairfile, 'rb')
+lfile = open(linefile, 'rb')
+lines = pickle.load(lfile)
 tuple_data = pickle.load(pfile)
 word_data = pickle.load(wfile)
-seed = "boat"
-print type (word_data)
-if seed in word_data:
-    print 'yes'
-else:
-    print 'not in list'
+for j in range (0, 10):
+    lineSeed = random.randint(0, len(lines)-1)
+    print lines[lineSeed]
+    print "hello"
+seedIndex = random.randint(0, len(word_data) -1)
+seed = word_data[seedIndex]
 phrase = ""
 for i in range(10):
     phrase += " " + seed
